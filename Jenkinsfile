@@ -80,8 +80,8 @@ pipeline {
                     nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
                     groupId: 'QA',
                     version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                    repositort: "${olaproject-release}",
-                    credentialsId: ${NEXUS_LOGIN},
+                    repository: "${olaproject-release}",
+                    credentialsId: "${NEXUS_LOGIN}",
                     artifacts: [
                         [artifactId: 'vproapp',
                         classifier: '',
