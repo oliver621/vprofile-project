@@ -20,8 +20,26 @@ pipeline {
     stages {
         stage('Build Bro'){
             steps {
-                sh 'mvn -s settings.xml install'
+                sh 'mvn -s settings.xml -DskipTests install'
             }
+            post {
+                success {
+                    echo "archiving bro"
+                    archiveArtifacts artifacts: '**/*.war'
+                }
+            }
+        }
+
+        stage('test'){
+          steps {
+            sh 'mvn -s settings.xml test'
+          }
+        }
+
+        stage('checkstyle analy'){
+          steps {
+            sh 'mvn -s settings.xml checkstyle:checkstyle'
+          }
         }
     }
 }
